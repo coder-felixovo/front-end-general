@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 侦听器</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <!-- 输入red, green或blue改变字体颜色 -->
+      <input type="text" v-model="colorValue" placeholder="enter red, green or blue" />
+      <p ref="text">text</p>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {
+            colorValue: '',
+          }
+        },
+        /* 
+          虽然计算属性在大多数情况下更合适，但有时也需要自定义一个监听器。
+          当需要在数据变化时执行异步开销较大的操作，使用watch是最有用的。
+         */
+        watch: {
+          colorValue(newValue, oldValue) {
+            console.log('vm.colorValue发生改变')
+            console.log('oldValue is ' + oldValue)
+            console.log('newValue is ' + newValue)
+            if (newValue === 'red' || newValue === 'green' || newValue === 'blue') {
+              this.$refs.text.style.color = newValue
+            }
+          },
+        },
+      })
+    </script>
+  </body>
+</html>

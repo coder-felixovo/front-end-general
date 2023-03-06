@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 指令的修饰符</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <!-- 
+        修饰符是以半角句号 . 指明的特殊后缀，用于指出一个指令应该以特殊的方式绑定。
+        例如：.prevent告诉v-on指令对于触发的事件调用event.preventDefault()
+      -->
+      <div>
+        <form action="http://localhost:8080/test" v-on:submit.prevent="onSubmit">
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+
+      <!-- 更多的修饰符在后面会提到 -->
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {}
+        },
+        methods: {
+          onSubmit() {
+            console.log('........')
+          },
+        },
+      })
+    </script>
+  </body>
+</html>

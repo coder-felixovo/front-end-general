@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 绑定style 对象语法</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <!-- 1. css property名称可以用camelCase（驼峰式）或kebab-case（短横线分隔，记得用引号括起来）来命名。-->
+      <p :style="{color: colorValue, 'font-size': fontSize + 'px'}">text</p>
+
+      <!-- 2. 直接绑定到一个样式对象，这会让模板更清晰。 -->
+      <p :style="styleObject">content</p>
+
+      <!-- 3. 对象语法常结合computed使用 -->
+      <p :style="styleObjectComputed">paragraph</p>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {
+            colorValue: 'red',
+            fontSize: 10,
+            styleObject: {
+              color: 'green',
+              fontSize: '20px',
+            },
+          }
+        },
+        computed: {
+          styleObjectComputed() {
+            return {
+              color: 'blue',
+              'font-size': '30px',
+            }
+          },
+        },
+      })
+    </script>
+  </body>
+</html>

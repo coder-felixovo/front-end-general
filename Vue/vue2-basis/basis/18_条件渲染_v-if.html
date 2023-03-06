@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 条件渲染 v-if</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <!-- 1. v-if 指令用于条件性地渲染一块内容。这块内容只会在指令的表达式返回 truthy 值的时候被渲染。 -->
+      <h1 v-if="displayTitle">条件渲染</h1>
+
+      <!-- 
+        2. 可以用 v-else 添加一个“else块”。
+        3. 可以用 v-else-if 添加一个“else if 块”。
+        4. v-else 和 v-else-if 必须紧跟在带 v-if 或 v-else-if 的元素之后。
+      -->
+      <p v-if="awesome">Vue is awesome!</p>
+      <p v-else>Oh no!</p>
+
+      <!-- 5. 在<template>元素上使用v-if指令，最终渲染结果将不包含<template>元素 -->
+      <template v-if="show">
+        <h1>Title</h1>
+        <p>Paragraph 1</p>
+        <p>Paragraph 2</p>
+      </template>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {
+            displayTitle: true,
+            awesome: true,
+            show: true,
+          }
+        },
+      })
+    </script>
+  </body>
+</html>

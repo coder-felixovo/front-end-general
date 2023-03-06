@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 创建Vue根实例</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <span>message: {{message}}</span>
+    </div>
+    <script>
+      /* 
+        1. 每个Vue应用都是通过new Vue创建一个Vue根实例开始的，以及可选的、嵌套的、可复用的组件树组成。
+        2. 当创建一个Vue实例时，可以传入option对象，例如data、methods等。
+        3. data中的所有property都会加入到Vue的响应式系统中，当这些property的值发生改变，
+          视图将会产生响应，匹配为更新后的值。
+        4. 注意：只有当实例被创建时就已经存在于data中的property才是响应式的。
+       */
+      var vm = new Vue({
+        el: '#web',
+        // 根实例的data可以是对象，后面会讲到：组件的data必须为函数
+        // data: {}
+        // 在后面的示例中，根实例的data都用函数的形式。
+        // 完整的写法：data: function () { return {} }
+        // 从ES2015开始，可以省略function，在后面的示例中都将采用如下形式。
+        data() {
+          return {
+            message: 'Hello Vue!',
+          }
+        },
+      })
+      console.log(vm.message) // "Hello Vue!"
+    </script>
+  </body>
+</html>

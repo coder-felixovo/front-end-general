@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 列表渲染 数组</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <!-- 
+        1. 可以用 v-for 指令基于一个数组来渲染一个列表。
+          v-for 指令需要使用 item in items 形式的特殊语法，
+          其中 items 是源数据数组，而 item 则是被迭代的数组元素的别名，
+          也可以用 of 替代 in 作为分隔符。
+        2. 在 v-for 块中，我们可以访问所有父作用域的 property。
+        3. 支持一个可选的第二个参数，即当前项的索引。
+       -->
+      <ul>
+        <li v-for="(item, index) in frameList" :key="item.id">{{parentMessage}}-{{index}}-{{item.name}}</li>
+      </ul>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {
+            parentMessage: 'Using v-for',
+            frameList: [
+              { id: '1', name: 'Vue' },
+              { id: '2', name: 'React' },
+              { id: '3', name: 'Angular' },
+            ],
+          }
+        },
+      })
+    </script>
+  </body>
+</html>

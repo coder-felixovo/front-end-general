@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 在组件上使用v-model</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <h1>在组件上使用v-model</h1>
+      <custom-input v-model="searchText"></custom-input>
+      <br />
+      <span>searchText: {{ searchText }}</span>
+    </div>
+    <script>
+      Vue.component('custom-input', {
+        props: ['value'],
+        template: `
+          <input
+            v-bind:value="value"
+            v-on:input="$emit('input', $event.target.value)"
+          >
+        `,
+      })
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {
+            searchText: '',
+          }
+        },
+      })
+    </script>
+  </body>
+</html>

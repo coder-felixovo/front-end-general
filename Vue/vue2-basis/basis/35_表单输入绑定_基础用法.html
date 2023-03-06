@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 表单输入绑定</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+      你可以用 v-model 指令在表单<input>、<textarea>及<select>元素上创建双向数据绑定，
+      它会根据控件类型自动选取正确的方法来更新元素，它负责监听用户的输入事件以更新数据，
+      并对一些极端场景进行一些特殊处理。
+
+      v-model 会忽略表单元素的value、checked、selected属性的初始值，而总是将Vue实例的数据作为数据源，
+      你应该通过js在组件的data选项中声明初始值。
+
+      v-model 在内部为不同的输入元素使用不同的property并抛出不同的事件。
+      * text 和 textarea 元素使用 value property 和 input 事件。
+      * checkbox 和 radio 使用 checked property 和 change 事件。
+      * select 字段将 value 作为 prop 并将 change 作为事件。
+
+      对于需要使用输入法 (如中文、日文、韩文等) 的语言，
+      你会发现 v-model 不会在输入法组合文字过程中得到更新。
+      如果你也想处理这个过程，请使用 input 事件。
+    -->
+    <div id="web">
+      <h1>表单输入绑定 基础用法</h1>
+
+      <!-- 文本 -->
+      <div class="example-1" style="padding: 10px 0">
+        <h3>文本</h3>
+        <input type="text" placeholder="edit me" v-model="text" />
+        <br />
+        <span>Text is:</span>
+        <br />
+        <span>{{ text }}</span>
+      </div>
+
+      <!-- 多行文本 
+        直接在文本区域插值不会生效，<textarea>{{text}}</textarea>，应用v-model代替。
+      -->
+      <div class="example-2" style="padding: 10px 0">
+        <h3>多行文本</h3>
+        <textarea placeholder="add multiple line" v-model="message"></textarea>
+        <br />
+        <span>Multiline message is:</span>
+        <br />
+        <span>{{ message }}</span>
+      </div>
+
+      <!-- 单个复选框，绑定到布尔值 -->
+      <div class="example-3" style="padding: 10px 0">
+        <h3>单个复选框</h3>
+        <input type="checkbox" id="checkbox" v-model="checked" />
+        <label for="checkbox">{{ checked }}</label>
+      </div>
+
+      <!-- 多个复选框，绑定到同一个数组 -->
+      <div class="example-4">
+        <h3>多个复选框</h3>
+        <input type="checkbox" id="vue" value="Vue" v-model="checkedFrames" />
+        <label for="vue">Vue</label>
+        <input type="checkbox" id="react" value="React" v-model="checkedFrames" />
+        <label for="react">React</label>
+        <input type="checkbox" id="angular" value="Angular" v-model="checkedFrames" />
+        <label for="angular">Angular</label>
+        <br />
+        <p>Checked frames: {{ checkedFrames }}</p>
+      </div>
+
+      <!-- 单选按钮 -->
+      <div class="example-5">
+        <h3>单选按钮</h3>
+        <input type="radio" id="male" value="男" v-model="picked" />
+        <label for="male">男</label>
+        <input type="radio" id="female" value="女" v-model="picked" />
+        <label for="female">女</label>
+        <br />
+        <span>Picked: {{ picked }}</span>
+      </div>
+
+      <!-- 选择框 单选 -->
+      <div class="example-6">
+        <h3>选择框 单选</h3>
+        <select v-model="selected">
+          <option disabled value="">请选择</option>
+          <option>北京</option>
+          <option>上海</option>
+          <option>广州</option>
+          <option>深圳</option>
+        </select>
+        <span>Selected: {{ selected }}</span>
+      </div>
+      <!-- 
+        如果 v-model 表达式的初始值未能匹配任何选项，<select> 元素将被渲染为“未选中”状态。
+          在 iOS 中，这会使用户无法选择第一个选项。因为这样的情况下，iOS 不会触发 change 事件。
+          因此，更推荐像上面这样提供一个值为空的禁用选项。
+       -->
+
+      <!-- 选择框 多选 绑定到一个数组 -->
+      <div class="example-7">
+        <h3>选择框 多选</h3>
+        <select multiple v-model="mulelected">
+          <option disabled value="">请选择</option>
+          <option>北京</option>
+          <option>上海</option>
+          <option>广州</option>
+          <option>深圳</option>
+        </select>
+        <br />
+        <span>mulelected: {{ mulelected }}</span>
+      </div>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {
+            text: '',
+            message: '',
+            checked: false,
+            checkedFrames: [],
+            picked: '',
+            selected: '',
+            mulelected: [],
+          }
+        },
+      })
+    </script>
+  </body>
+</html>

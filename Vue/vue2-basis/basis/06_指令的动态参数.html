@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 指令的动态参数</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <!-- 指令的动态参数
+        从Vue2.6.0开始，可以用 [] 将js表达式括起来作为指令的参数。
+      -->
+      <div style="padding: 10px 0;">
+        <!-- 
+          data中的param的值为"href"
+          那么这个绑定等价于 v-bind:href
+        -->
+        <a v-bind:[param]="link.url">{{ link.name }}</a>
+      </div>
+
+      <!-- 
+        对动态参数值的约束
+          动态参数预期会求出一个字符串，异常情况下值为null，这个null可以被用于移除绑定，
+          任何其它非字符串类型的值都将会触发一个警告。
+
+        对动态参数表达式的约束
+          1. 在DOM中使用模板时，避免使用大写字符命名，因为浏览器会把HTML attribute的名称全部强制转为小写。
+          2. 空格和引号在HTML attribute的名称里是无效的，解决方法：
+            (1) 使用不带空格和引号的表达式
+            (2) 用计算属性替代
+      -->
+      <!-- 错误示例 -->
+      <div style="padding: 10px 0;">
+        <a v-bind:['foo' + bar]="link.url">{{link.name}}</a>
+      </div>
+      
+      <!-- 使用计算属性替代
+        结果：fooabc="http://www.baidu.com"
+      -->
+      <div style="padding: 10px 0;">
+        <a v-bind:[dynamic]="link.url">{{link.name}}</a>
+      </div>
+      
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {
+            param: 'href',
+            link: {
+              url: 'http://www.baidu.com',
+              name: '百度',
+            },
+            bar: 'abc',
+          }
+        },
+        computed: {
+          dynamic() {
+            return 'foo' + this.bar
+          },
+        },
+      })
+    </script>
+  </body>
+</html>

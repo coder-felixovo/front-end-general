@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 组件的复用</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <!-- 
+        你可以将组件进行任意次数的复用，
+        注意当点击按钮时，每个组件都会各自独立维护它的 count。因为你每用一次组件，就会有一个它的新实例被创建。
+      -->
+      <h1>组件的复用</h1>
+      <button-counter></button-counter>
+      <button-counter></button-counter>
+      <button-counter></button-counter>
+    </div>
+    <script>
+      Vue.component('button-counter', {
+        // 一个组件的 data 选项必须是一个函数，因此每个实例可以维护一份被返回对象的独立的拷贝
+        data() {
+          return {
+            count: 0,
+          }
+        },
+        template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>',
+      })
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {}
+        },
+      })
+    </script>
+  </body>
+</html>

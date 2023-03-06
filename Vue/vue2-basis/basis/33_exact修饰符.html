@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue exact修饰符</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <!-- 
+        Vue2.5.0 新增
+        .exact 修饰符允许你控制由精确的系统修饰符组合触发的事件。
+       -->
+      <!-- 即使 Alt 或 Shift 被一同按下时也会触发 -->
+      <button @click.ctrl="clickHandler('A')">A</button>
+
+      <!-- 有且只有 Ctrl 被按下的时候才触发 -->
+      <button @click.ctrl.exact="clickHandler('B')">B</button>
+
+      <!-- 没有任何系统修饰符被按下的时候才触发 -->
+      <button @click.exact="clickHandler('C')">C</button>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#web',
+        methods: {
+          clickHandler(value) {
+            console.log(`You click button ${value}`)
+          },
+        },
+      })
+    </script>
+  </body>
+</html>

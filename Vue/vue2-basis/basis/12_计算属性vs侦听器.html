@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 计算属性vs侦听器</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <h1>computed和watch比较</h3>
+      <h3>watch</h3>
+      <p>firstNameWatch: {{ firstNameWatch }}</p>
+      <p>lastNameWatch: {{ lastNameWatch }}</p>
+      <p>fullNameWatch: {{ fullNameWatch }}</p>
+      <h3>computed</h3>
+      <p>firstNameComputed: {{ firstNameComputed }}</p>
+      <p>lastNameComputed: {{ lastNameComputed }}</p>
+      <p>fullNameWatch: {{ fullNameWatch }}</p>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {
+            firstNameWatch: 'Foo',
+            lastNameWatch: 'Bar',
+            fullNameWatch: 'Foo Bar',
+            firstNameComputed: 'Foo',
+            lastNameComputed: 'Bar'
+          }
+        },
+        /* 
+          Vue提供了一种更通用的方式来观察和响应Vue实例上的数据变动，【侦听属性】，当你有一些数据
+          要随着它的数据变动而变动时，你很容易滥用Vue，然而，通常更好的做法是使用computed，而不是watch。
+         */
+        watch: {
+          firstNameW(value) {
+            this.fullNameW = value + ' ' + this.lastNameW
+          },
+          lastNameW(value) {
+            this.fullNameW = this.firstNameW + ' ' + value
+          },
+        },
+        computed: {
+          fullNameComputed () {
+            return this.firstNameComputed + ' ' + this.lastNameComputed
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

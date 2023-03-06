@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 计算属性</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <!-- 在前面的示例中，我们在{{}}中使用了js表达式 -->
+      <p>Using js expression: <span style="color: red">{{ message.split('').reverse().join('') }}</span></p>
+
+      <!-- 
+        虽然这很方便，但是Vue设计它的初衷是用于简单运算的，
+        在模板中放入太多逻辑会让模板过重且不易维护，
+        所以，对于复杂的逻辑，你都应当使用【计算属性】
+      -->
+      <p>Origin message: <span style="color: blue">{{ message }}</span></p>
+      <p>Computed reversed message: <span style="color: green">{{ reversedMessageComputed }}</span></p>
+
+      <!-- 
+        我们可以通过在表达式中调用方法达到同样的效果，区别在于：
+
+        计算属性：基于它的响应式依赖进行缓存的，只有相关响应式依赖发生改变时它才会重新求值，
+          只要响应式依赖没有改变，多次访问计算属性，会立即返回之前的结果，而不必再次执行函数。
+
+        方法：调用方法总会再次执行函数。
+      -->
+      <p>Using method: <span style="color: pink">{{ reversedMessageMethod() }}</span></p>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {
+            message: 'Hello Vue!',
+          }
+        },
+        methods: {
+          reversedMessageMethod() {
+            console.log('方法')
+            return this.message.split('').reverse().join('')
+          },
+        },
+        computed: {
+          /* 
+            定义了一个计算属性reversedMessage，提供的函数作为vm.reversedMessage的getter函数，
+            vm.resversedMessage的值始终取决于vm.message的值。
+           */
+          reversedMessageComputed() {
+            console.log('计算属性')
+            // this 指向 vm 实例
+            return this.message.split('').reverse().join('')
+          },
+        },
+      })
+    </script>
+  </body>
+</html>

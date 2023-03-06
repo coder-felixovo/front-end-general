@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .one {
+        width: 300px;
+        height: 300px;
+        background-color: lightpink;
+      }
+      .two {
+        width: 200px;
+        height: 200px;
+        background-color: lightgreen;
+      }
+      .three {
+        width: 100px;
+        height: 100px;
+        background-color: lightblue;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <!-- 
+        Vue 为 v-on 提供了事件修饰符。
+        .stop 阻止事件传播
+        .prevent 阻止事件默认行为
+        .capture 事件监听使用捕获模式
+        .self 只当在 event.target 是当前元素自身时触发处理函数，即事件不是从内部元素触发的
+        .once 点击事件将只触发一次
+        .passive
+
+        使用修饰符时，顺序很重要；相应的代码会以同样的顺序产生。
+        因此，用 v-on:click.prevent.self 会阻止所有的点击，
+        而 v-on:click.self.prevent 只会阻止对元素自身的点击。
+      -->
+      <div id="example-1">
+        <div class="one" @click="clickOne">
+          Area one
+          <div class="two" @click="clickTwo">
+            Area two
+            <div class="three" @click.stop="clickThree">Area three</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {}
+        },
+        methods: {
+          clickOne() {
+            console.log('one')
+          },
+          clickTwo() {
+            console.log('two')
+          },
+          clickThree() {
+            console.log('three')
+          },
+        },
+      })
+    </script>
+  </body>
+</html>

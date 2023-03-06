@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 组件名</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <my-component-one></my-component-one>
+      <my-component-two></my-component-two>
+
+      <!-- 报错 -->
+      <!-- <MyComponentTwo></MyComponentTwo> -->
+    </div>
+    <script>
+      /* 
+        当直接在`DOM`中使用一个组件，而不是在`字符串模板`或`单文件组件`中，
+        建议使用W3C规范中的自定义组件名：`字母全小写且包含'-'分隔符`。
+        
+        定义组件名的方式有两种：
+        1. kebab-case（短横线分隔命名）
+          在引用组件时，也必须用kebab-case的形式
+          例如：<my-component-one>
+        2. PascalCase（首字母大写命名）
+          在引用组件时，可以用kebab-case和PascalCase两种形式。
+          但是直接在DOM中使用时只有kebab-case形式有效
+       */
+      Vue.component('my-component-one', {
+        template: `
+          <div>
+            <span>组件一：使用kebab-case命名组件</span>
+          </div>
+        `,
+      })
+      Vue.component('MyComponentTwo', {
+        template: `
+          <div>
+            <span>组件二：使用PascalCase命名组件</span>
+          </div>
+        `,
+      })
+      var vm = new Vue({
+        el: '#web',
+      })
+    </script>
+  </body>
+</html>

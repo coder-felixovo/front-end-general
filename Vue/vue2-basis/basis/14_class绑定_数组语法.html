@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue class绑定 数组语法</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <!-- 
+        1. 可以把一个数组传给v-bind:class，应用一个class列表。
+        2. 渲染结果：class="active text-danger"
+      -->
+      <div :class="[activeClass, errorClass]"></div>
+
+      <!-- 
+        3. 根据条件切换可以使用三元表达式
+        4. isActive为true时，渲染结果为class="active text-danger"
+       -->
+      <div :class="[isActive ? activeClass:'', errorClass]"></div>
+
+      <!-- 
+        5. 但是当有多个class条件，上面的写法有些繁琐，因此在数组中还可以使用对象语法。
+        6. isActive为true时，渲染结果为class="active text-danger"
+       -->
+      <div :class="[{ active: isActive }, errorClass]"></div>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {
+            activeClass: 'active',
+            errorClass: 'text-danger',
+            isActive: true,
+          }
+        },
+      })
+    </script>
+  </body>
+</html>

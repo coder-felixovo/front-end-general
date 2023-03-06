@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 模板语法 插值</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      p {
+        padding: 6px 0;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <!-- 1. 文本
+        使用Mustache语法（双大括号）的文本插值。
+        示例：
+          1. {{message}}将被替换为data中message的值，当message的值发生改变，插值处的内容也会更新。
+          2. 使用v-once指令，一次性执行插值，当数据改变，插值处的内容不会更新。
+            注意：这会影响该节点上的其它数据绑定。
+       -->
+      <div style="padding: 10px 0">
+        <p>Using Mustache: {{message}}</p>
+        <p v-once>Using v-once: {{useVOnce}}</p>
+      </div>
+
+      <!-- 2. 原始HTML
+        双大括号会解释为普通文本，使用v-html指令输出真正的HTML。
+        示例：
+          <span>的内容将会被替换为data中rawHTML的值，直接作为HTML，会忽略解析该值的数据绑定。
+        注意：
+          1. 你不能使用v-html来复合局部模板，因为Vue不是基于字符串的模板引擎。
+          2. 动态渲染v-html可能会非常危险，因为它很容易导致XSS攻击，因此不要对用户提供的内容使用HTML插值。
+       -->
+      <div style="padding: 10px 0">
+        <p>Using Mustache: {{rawHTML}}</p>
+        <p>Using v-html directive: <span v-html="rawHTML"></span></p>
+      </div>
+
+      <!-- 3. attribute
+        Mustache语法不能作用在HTML attribute上，这时我们应该使用v-bind指令。
+        示例：
+          1. 使用v-bind指令为HTML元素动态绑定id。
+          2. 注意：对于boolean attribute，它们存在就意味着值为true，但是v-bind略有不同
+            如果isButtonDisabled的值为null、undefined或false，则disabled属性不会被包含在渲染出来的<button>元素上。
+       -->
+      <div style="padding: 10px 0">
+        <p v-bind:id="dynamicId">Using v-bind to bind HTML element's id</p>
+        <button v-bind:disabled="isButtonDisabled">Button</button>
+      </div>
+
+      <!-- 4. JavaScript表达式
+        在数据绑定中，还可以写JavaScript表达式，但每个绑定只能包含【单个表达式】
+        
+        # 错误示例
+        {{ var a = 1 }}  这是语句，不是表达式
+        {{ if(ok) { return message} }} 流控制也不会生效，请使用三元表达式
+       -->
+      <div style="padding: 10px 0">
+        <h3>Using javascript expression:</h3>
+        <p>{{ number + 1 }}</p>
+        <p>{{ message.split('').reverse().join('') }}</p>
+      </div>
+
+      <!-- 注意
+        模板表达式都被放在沙盒中，只能访问全局变量的一个白名单，例如 Math 和 Date，
+        你不应该在模板表达式中试图访问用户定义的全局变量。
+       -->
+    </div>
+    <script>
+      /* 
+        Vue使用了基于HTML的模板语法，允许开发者声明式地将DOM绑定至底层Vue实例的数据，所有Vue的模板都是合法的HTML，
+        能够被遵循规范的浏览器和HTML解析器解析。
+       */
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {
+            message: 'Hi Vue!',
+            useVOnce: '这将不会改变',
+            rawHTML: '<span style="color: red;">双大括号会解释为普通文本，使用v-html指令输出真正的HTML</span>',
+            dynamicId: 'a',
+            isButtonDisabled: true,
+            number: 1,
+          }
+        },
+      })
+    </script>
+  </body>
+</html>

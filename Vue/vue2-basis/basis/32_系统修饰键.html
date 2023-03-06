@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 系统修饰键</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <!-- 
+        Vue2.1.0 新增
+        可以用如下修饰符来实现仅在按下相应按键时才触发鼠标或键盘事件的监听器。
+        .ctrl .alt .shift .meta
+        注意：不同的系统或键盘，.meta对应的键不一样。
+       -->
+      <h1>系统修饰键</h1>
+      <input type="text" @keyup.ctrl.enter="submit" v-model="value" />
+      <!-- 
+        注意：修饰键与常规按键不同，在和 keyup 事件一起用时，事件触发时修饰键必须处于按下状态。
+        换句话说，只有在按住 ctrl 的情况下释放其它按键，才能触发 keyup.ctrl。而单单释放 ctrl 也不会触发事件。
+        如果你想要这样的行为，请为 ctrl 换用 keyCode：keyup.17。
+       -->
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {
+            value: '',
+          }
+        },
+        methods: {
+          submit() {
+            console.log('你输入的数据为：' + this.value)
+          },
+        },
+      })
+    </script>
+  </body>
+</html>

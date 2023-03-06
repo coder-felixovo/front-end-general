@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 鼠标按钮修饰符</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <!-- 
+        Vue2.2.0 新增
+        鼠标按钮修饰符
+        .left .right .middle
+       -->
+      <button @click.left="clickMouseLeft">Click mouse left</button>
+      <button @click.middle="clickMouseMiddle">Click mouse middle</button>
+      <button @click.right="clickMouseRight">Click mouse right</button>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#web',
+        methods: {
+          clickMouseLeft() {
+            console.log('You click mouse left')
+          },
+          clickMouseMiddle() {
+            console.log('You click mouse middle')
+          },
+          clickMouseRight() {
+            console.log('You click mouse right')
+          },
+        },
+      })
+    </script>
+  </body>
+</html>

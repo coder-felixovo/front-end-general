@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 表单输入 值绑定</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+      对于单选按钮，复选框及选择框的选项，v-model 绑定的值通常是静态字符串 (对于复选框也可以是布尔值)。
+      但是有时我们可能想把值绑定到 Vue 实例的一个动态 property 上，
+      这时可以用 v-bind 实现，并且这个 property 的值可以不是字符串。
+     -->
+    <div id="web">
+      <h1>表单输入 值绑定</h1>
+      <div class="example-1">
+        <h3>单选按钮</h3>
+        <!-- 当选中时，`picked` 为字符串 "a" -->
+        <input type="radio" v-model="picked" value="a" />
+        <br />
+        <span>picked: {{ picked }}</span>
+      </div>
+
+      <div class="example-2">
+        <h3>单个复选框</h3>
+        <!-- `toggle` 为 true 或 false -->
+        <input type="checkbox" v-model="toggle" />
+        <br />
+        <span>toggle: {{ toggle }}</span>
+      </div>
+
+      <!-- 当选中第一个选项时，`selected` 为字符串 "abc" -->
+      <div class="example-3">
+        <h3>选择框</h3>
+        <select v-model="selected">
+          <option value="abc">ABC</option>
+        </select>
+        <br />
+        <span>selected: {{ selected }}</span>
+      </div>
+
+      <div class="example-4">
+        <h3>多个复选框</h3>
+        <!-- 选中时 `mulToggle` 为 "yes"；没有选择时为 "no" -->
+        <input type="checkbox" v-model="mulToggle" true-value="yes" false-value="no" />
+        <br />
+        <span>mulToggle: {{ mulToggle }}</span>
+      </div>
+      <!-- 
+        这里的 true-value 和 false-value attribute 并不会影响输入控件的 value attribute，
+        因为浏览器在提交表单时并不会包含未被选中的复选框。
+        如果要确保表单中这两个值中的一个能够被提交，(即“yes”或“no”)，请换用单选按钮。
+       -->
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {
+            picked: '',
+            toggle: true,
+            selected: '',
+            mulToggle: 'yes',
+          }
+        },
+      })
+    </script>
+  </body>
+</html>

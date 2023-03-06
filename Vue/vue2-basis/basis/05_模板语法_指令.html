@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 模板语法 指令</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <!-- 
+        指令是带有 v- 前缀的特殊attribute，它的值预期是【单个js表达式】（v-for是例外情况），
+        职责：当表达式的值改变时，产生连带的影响，响应式地作用于DOM。
+       -->
+
+      <!-- 1. 条件渲染指令示例 -->
+      <div style="padding: 10px 0">
+        <span v-if="seen">如果seen为true，你将能够看到我</span>
+      </div>
+
+      <!-- 2. 参数
+        指令能够接收一个参数，在指令名称后以冒号表示。使用v-bind指令可以响应式地更新HTML attribute
+       -->
+      <div style="padding: 10px 0">
+        <a v-bind:href="link.url">{{link.name}}</a>
+      </div>
+
+      <!-- 3. v-on指令监听DOM事件 -->
+      <div style="padding: 10px 0">
+        <button v-on:click="doSomething">CLICK</button>
+      </div>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {
+            seen: true,
+            link: {
+              url: 'http://www.baidu.com',
+              name: '百度',
+            },
+          }
+        },
+        methods: {
+          doSomething() {
+            console.log('You click button')
+          },
+        },
+      })
+    </script>
+  </body>
+</html>

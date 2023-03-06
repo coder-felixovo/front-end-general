@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Prop的类型</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web"></div>
+    <script>
+      /* 
+        在此之前，我们只使用了以字符串数组形式列出的prop，例如：['title']。
+        实际上，我们还可以为每个prop指定值的类型，此时，你可以以`对象`的形式列出，
+        对象的property名称和值分别是prop的名称和类型。
+        这种形式，不仅为你的组件提供了文档，当它们遇到错误的类型时在浏览器的控制台提示用户。
+       */
+      Vue.component('my-component', {
+        props: {
+          title: String,
+          likes: Number,
+          author: Object,
+        },
+      })
+      var vm = new Vue({
+        el: '#web',
+      })
+    </script>
+  </body>
+</html>

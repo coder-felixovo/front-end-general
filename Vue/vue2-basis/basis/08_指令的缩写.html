@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 指令的缩写</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <!-- 
+        Vue为 v-bind 和 v-on 两个指令提供了简写
+        
+        v-bind
+          完整：v-bind:href="url"
+          缩写：:href="url"
+          动态缩写：:[dynamic]="url"
+        
+        v-on
+          完整：v-on:click="doSomething"
+          缩写：@click="doSomething"
+          动态缩写：@[event]="doSomething"
+        
+        : 和 @ 对于 attribute名称来说都是合法字符，在所有支持Vue的浏览器都能被正确地解析，
+        而且，它们最终不会出现在渲染标记中。
+
+        在后面的示例中，使用 v-bind 和 v-on 指令都将 采用缩写的形式。
+       -->
+      <a :href="link.url">{{link.name}}</a>
+      <button @click="doSomething">Click</button>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {
+            link: {
+              url: 'http://www.baidu.com',
+              name: '百度',
+            },
+          }
+        },
+        methods: {
+          doSomething() {
+            console.log('You click button')
+          },
+        },
+      })
+    </script>
+  </body>
+</html>

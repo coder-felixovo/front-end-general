@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 监听子组件事件</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+      子组件调用内置的 $emit 方法传入事件名称来触发一个事件，并且可以抛出一个值
+      父组件在调用子组件上通过 v-on 监听该事件，可以通过 $event 访问抛出的值，
+      如果事件处理函数是一个方法，那么该值会作为第一个参数传入方法。
+    -->
+    <div id="web">
+      <h1>监听子组件事件</h1>
+      <my-comp @one="valueFromSub = $event" @two="handler"></my-comp>
+    </div>
+    <script>
+      Vue.component('my-comp', {
+        template: `
+          <div>
+            <button @click="$emit('one', 'message')">Button 1</button>
+            <button @click="$emit('two', 'text')">Button 2</button>
+          </div>
+        `,
+      })
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {
+            valueFromSub: '',
+          }
+        },
+        methods: {
+          handler(value) {
+            console.log(value)
+          },
+        },
+      })
+    </script>
+  </body>
+</html>

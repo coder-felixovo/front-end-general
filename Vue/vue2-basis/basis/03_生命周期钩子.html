@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 生命周期钩子</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web"></div>
+    <script>
+      /* 
+        每个Vue实例在被创建时都要经过一系列的初始化过程，例如：设置数据监听、编译模板、将实例挂载到DOM并在数据变化时更新DOM 等。
+        在这个过程中，也会执行一些称为【生命周期钩子】的【函数】。
+       */
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {
+            message: 'Life Cycle',
+          }
+        },
+        methods: {
+          say() {
+            console.log('Hello Vue!')
+          },
+        },
+        // 执行beforeCreate钩子时，data、methods还未初始化
+        beforeCreate() {
+          console.log(data) // undefined
+          console.log(methods) // undefined
+        },
+        // 执行created钩子时，data、methods已经初始化完成
+        created() {
+          console.log(this.message) // "Life Cycle"
+          this.say() // "Hello Vue!"
+        },
+        // 其它的生命周期钩子请参考官网文档，这里不一一描述。
+        /* 
+          注意：不要在option或callback上使用箭头函数
+          例如：created: () => {}
+          因为箭头函数并没有this，它的this作为变量一直向上级词法作用域查找，找到为止，经常导致以下两种错误：
+          1. Cannot read property of undefined
+          2. this.myMethod is not a function
+         */
+      })
+    </script>
+  </body>
+</html>

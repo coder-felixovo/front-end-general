@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 非Prop的attribute</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <style>
+      .red {
+        color: red;
+      }
+      .fs-20px {
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 
+        class "red" 会被添加到组件的根元素上，示例中为div
+        而且不会覆盖div上的class "fs-20px'
+        最终div的class为"fs-20px red"
+      -->
+      <my-component class="red" required placeholder="Input"></my-component>
+    </div>
+    <script>
+      /*
+        一个非Prop的attribute是指传向一个组件，但是该组件并没有相应prop定义的attribute。
+        此时，这些attribute会被添加到`组件的根元素`上。
+      */
+      Vue.component('my-component', {
+        // 对于大多数attribute来说，从外部提供给组件的值会替换掉组件内部设置好的值，class和style除外
+        // 如果不希望根元素继承attribute，设置如下
+        inheritAttrs: false,
+        template: `
+          <div class="fs-20px">
+            <span>非Prop的attribute添加到组件的根元素上</span>
+            <input type="text" v-bind="$attrs"></input>
+          </div>
+        `,
+      })
+      var vm = new Vue({
+        el: '#app',
+      })
+    </script>
+  </body>
+</html>

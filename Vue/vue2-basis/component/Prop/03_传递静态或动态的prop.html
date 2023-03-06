@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 传递静态或动态的Prop</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <h1>传递静态或动态的prop</h1>
+      <!-- 
+        通过 v-bind 来告诉 Vue 这是一个 js 表达式而不是一个字符串。
+        1. 传入一个数字
+        2. 传入一个布尔值
+        3. 传入一个数组
+        4. 传入一个对象
+        5. 传入一个对象的所有property
+          使用不带参数的v-bind
+       -->
+      <blog-post
+        static="commentIds"
+        :likes="likes"
+        :is-published="isPublished"
+        :comment-ids="commentIds"
+        :author="author"
+        v-bind="post"
+      ></blog-post>
+    </div>
+    <script>
+      /* 
+        任何类型的值都可以传给一个prop 
+      */
+      Vue.component('blog-post', {
+        props: ['static', 'likes', 'isPublished', 'commentIds', 'author', 'id', 'title'],
+        template: `
+          <div class="blog-post">
+          </div>
+        `,
+        created() {
+          console.log(typeof this.static)
+          console.log('typeof likes: ' + typeof this.likes)
+          console.log('typeof isPublished: ' + typeof this.isPublished)
+          console.log('Array.isArray(commentIds): ' + Array.isArray(this.commentIds))
+          console.log('typeof author: ' + typeof this.author)
+          console.log(this.id, this.title)
+        },
+      })
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {
+            likes: 666,
+            isPublished: true,
+            commentIds: [1, 2, 3],
+            author: {
+              name: 'aaa',
+              age: 32,
+            },
+            post: {
+              id: '123',
+              title: 'Hello Vue',
+            },
+          }
+        },
+      })
+    </script>
+  </body>
+</html>

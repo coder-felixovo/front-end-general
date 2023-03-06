@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 局部注册组件</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web"></div>
+    <script>
+      /* 
+        全局注册往往是不够理想的，如果你使用了像Webpack这样的构建系统，全局注册所有组件意味着，
+        即便你不再使用该组件，它仍然会被包裹在最终的构建结果中，这就造成了下载的js的无谓的增加。
+      */
+      // 局部注册组件
+      // 1. 首先用一个普通js对象来定义组件
+      var CompA = {}
+      var CompB = {}
+      var vm = new Vue({
+        el: '#web',
+        // 2. 在 components option 中定义你想要使用的组件
+        //   property name就是自定义组件的名称
+        //   property value就是组件的选项对象
+        /* 
+          注意：局部注册的组件在其子组件中不可用
+          对于示例，如果你希望comp-a组件能够在comp-b组件中使用，
+          那么需要在comp-b组件的components option中定义comp-a组件
+        */
+        components: {
+          'comp-a': CompA,
+          'comp-b': CompB,
+        },
+        data() {
+          return {}
+        },
+      })
+    </script>
+  </body>
+</html>

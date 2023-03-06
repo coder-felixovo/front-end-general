@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 实例属性和方法</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web"></div>
+    <script>
+      /*
+        Vue实例还暴露了一些property和method，它们都有 $ 前缀。
+        更多实例属性和方法请参考官网API文档。
+       */
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {
+            value: 1,
+          }
+        },
+      })
+      console.log(vm.$data.value) // 1
+      console.log(vm.$data.value === vm.value) // true
+      console.log(vm.$el === document.getElementById('web')) // true
+      vm.$watch('value', function (newValue, oldValue) {
+        // 在 vm.value 改变是调用
+        console.log('Old value is ' + oldValue)
+        console.log('New value is ' + newValue)
+      })
+    </script>
+  </body>
+</html>

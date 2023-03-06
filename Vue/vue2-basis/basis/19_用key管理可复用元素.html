@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 用key管理可复用元素</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <!-- 
+        下面示例每次切换时：
+        1. 输入框都将被重新渲染
+        2. <label>元素仍然会被复用，因为它没有添加key
+       -->
+      <template v-if="loginType === 'username'">
+        <label>Username</label>
+        <input placeholder="Enter your username" key="username-input" />
+      </template>
+      <template v-else>
+        <label>Email</label>
+        <input placeholder="Enter your email address" key="email-input" />
+      </template>
+      <button @click="toggleLoginType">Toggle login type</button>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {
+            loginType: 'username',
+          }
+        },
+        methods: {
+          toggleLoginType() {
+            this.loginType = this.loginType === 'username' ? 'email' : 'username'
+          },
+        },
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 变更数组</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <!-- 
+        1. Vue 将被侦听的数组的变更方法进行了包裹，所以它们也将会触发视图更新。这些被包裹过的方法包括：
+        push() pop() unshift() shift() splice() sort() reverse()
+
+        2. 由于 JavaScript 的限制，Vue 不能检测数组和对象的变化（响应式原理）。
+       -->
+      <ul>
+        <li v-for="(item, index) in fruits" :key="item.id">
+          <span>{{index}}: {{item.name}}</span>
+        </li>
+      </ul>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {
+            fruits: [
+              { id: 'a', name: 'apple' },
+              { id: 'b', name: 'coconut' },
+              { id: 'c', name: 'coconut' },
+            ],
+          }
+        },
+      })
+    </script>
+  </body>
+</html>

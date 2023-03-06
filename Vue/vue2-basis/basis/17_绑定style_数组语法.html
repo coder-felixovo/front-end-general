@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 绑定style 数组语法</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <!-- v-bind:style的数组语法可以将多个样式对象应用到同一个元素上 -->
+      <div :style="[boxStyle, fontStyle]">text</div>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {
+            boxStyle: {
+              width: '100px',
+              height: '100px',
+              backgroundColor: 'pink',
+            },
+            fontStyle: {
+              fontSize: '20px',
+              color: 'blue',
+            },
+          }
+        },
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 全局注册组件</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <comp-a></comp-a>
+    </div>
+    <script>
+      /* 
+        使用Vue.component全局注册组件，可以用在任何新创建的Vue根实例的模板中。
+        在所有子组件中也是如此，也就是说全局注册的组件，在各自内部也可以使用。
+      */
+      Vue.component('comp-a', {
+        template: `
+        <div>
+          <span>使用Vue.component全局注册组件</span>
+        </div>
+      `,
+      })
+      var vm = new Vue({
+        el: '#web',
+      })
+      // 注意：全局注册的组件必须在Vue根实例创建之前。
+    </script>
+  </body>
+</html>

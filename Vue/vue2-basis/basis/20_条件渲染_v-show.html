@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 条件渲染 v-show</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <!-- 
+        1. 另一个用于根据条件展示元素的选项是 v-show 指令。
+        2. 带有 v-show 的元素始终会被渲染并保留在 DOM 中。
+        3. v-show 只是简单地切换元素的 CSS property display。
+        4. 注意，v-show 不支持 <template> 元素，也不支持 v-else。
+      -->
+      <h1 v-show="showTitle">条件渲染 v-show</h1>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {
+            showTitle: true,
+          }
+        },
+      })
+    </script>
+  </body>
+</html>

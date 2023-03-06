@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue class绑定 对象语法</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <!-- 
+        1. 给v-bind:class传一个对象，动态地切换class 
+        2. 可以与普通class共存
+      -->
+
+      <!-- 
+        3. active这个class是否存在取决于isActive的truthy值。
+        4. 使用短横线连接命名需要加引号。
+        5. 渲染结果：class="box active"
+        6. 当isError的值变为true，class列表会更新为"box active text-danger"
+      -->
+      <div class="box" :class="{ active: isActive, 'text-danger': isError}"></div>
+
+      <!-- 
+        7. 绑定的数据对象不必内联在模板里，还可以直接接收一个对象。
+        8. 渲染结果：class="box active"
+      -->
+      <div class="box" :class="classObject"></div>
+
+      <!-- 
+        9. 也可以绑定一个返回对象的computed 
+        10. 渲染结果：class="box active"
+      -->
+      <div class="box" :class="classObjectComputed"></div>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {
+            isActive: true,
+            isError: false,
+            classObject: {
+              active: true,
+              'text-danger': false,
+            },
+          }
+        },
+        computed: {
+          classObjectComputed() {
+            return {
+              active: this.isActive,
+              'text-danger': this.isError,
+            }
+          },
+        },
+      })
+    </script>
+  </body>
+</html>

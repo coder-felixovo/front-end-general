@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 单向数据流</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <my-component :initial-counter="initialCounter" :size="size"></my-component>
+    </div>
+    <script>
+      /* 
+        父子组件prop之间形成了一个`单向下行绑定`：父级prop的更新会向下流动到子组件中，反过来则不行，
+        防止从子组件意外变更父级组件的状态，从而导致数据流向难以理解。
+        
+        每次父组件发生变更时，子组件中所有的prop都将会刷新为最新的值，这意味着你不应该在一个子组件内部改变prop，
+        如果你这样做了，Vue会在浏览器控制台发出警告。
+
+        本节演示两种常见的试图改变一个prop的情形。
+
+        注意在 JavaScript 中对象和数组是通过引用传入的，所以对于一个数组或对象类型的 prop 来说，
+        在子组件中改变变更这个对象或数组本身将会影响到父组件的状态。
+      */
+      Vue.component('my-component', {
+        props: ['initialCounter', 'size'],
+        template: `
+          <div class="my-component">
+            <span>counter: {{ counter }}</span>
+            <br>
+            <span>normalizedSize: {{ normalizedSize }}</span>
+          </div>
+        `,
+        data() {
+          return {
+            // 1. 这个 prop 用来传递一个初始值；这个子组件接下来希望将其作为一个本地的 prop 数据来使用。
+            counter: this.initialCounter,
+          }
+        },
+        computed: {
+          // 2. 这个 prop 以一种原始的值传入且需要进行转换。在这种情况下，最好使用这个 prop 的值来定义一个计算属性
+          normalizedSize() {
+            return this.size.trim().toLowerCase()
+          },
+        },
+      })
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {
+            initialCounter: 0,
+            size: ' hello vue ! ',
+          }
+        },
+      })
+    </script>
+  </body>
+</html>

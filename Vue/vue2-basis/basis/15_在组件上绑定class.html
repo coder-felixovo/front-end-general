@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 在组件上绑定class</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <!-- 
+        当在一个自定义组件上使用class时，这些class将被添加到该组件的根元素上，
+        这个元素上已经存在的class不会被覆盖，对于v-bind:class也一样。
+       -->
+      <my-component class="baz boo"></my-component>
+      <!-- 渲染结果： <p class="foo bar baz boo">在组件上使用class</p> -->
+    </div>
+    <script>
+      // 定义一个组件
+      Vue.component('my-component', {
+        template: '<p class="foo bar">在组件上使用class</p>',
+      })
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {}
+        },
+      })
+    </script>
+  </body>
+</html>

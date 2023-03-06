@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 单个根元素</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <h1>单个根元素</h1>
+      <my-comp></my-comp>
+    </div>
+    <script>
+      // 每个组件必须只有一个根元素
+
+      // 错误示例
+      /* Vue.component('my-comp', {
+        template: `
+          <h1>Title h1</h1>
+          <h2>Title h2</h2>
+        `,
+      }) */
+
+      // 通常我们的做法是用一个<div>元素进行包裹
+      Vue.component('my-comp', {
+        template: `
+          <div>
+            <p>Paragraph 1</p>
+            <p>Paragraph 2</p>
+          </div>
+        `,
+      })
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {}
+        },
+      })
+    </script>
+  </body>
+</html>

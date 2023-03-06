@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 计算属性的setter</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <h3>计算属性默认只有getter，不过也可以提供一个setter</h3>
+      <p>firstName: {{ firstName }}</p>
+      <p>lastName: {{ lastName }}</p>
+      <p>fullName: {{ fullName }}</p>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {
+            firstName: 'Foo',
+            lastName: 'Bar',
+          }
+        },
+        /* 
+          计算属性默认只有getter，不过也可以提供一个setter
+         */
+        computed: {
+          fullName: {
+            get() {
+              console.log('fullName getter')
+              return this.firstName + this.lastName
+            },
+            set(newValue) {
+              console.log('fullName setter')
+              var names = newValue.split(' ')
+              this.firstName = names[0]
+              this.lastName = names[names.length - 1]
+            },
+          },
+        },
+      })
+    </script>
+  </body>
+</html>

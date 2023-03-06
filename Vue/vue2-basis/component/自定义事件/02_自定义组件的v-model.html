@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 自定义组件的v-model</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="web">
+      <!-- 
+        这里的 lovingVue 的值将会传入这个名为 checked 的 prop。
+        同时当 <my-component> 触发一个 change 事件并附带一个新的值的时候，
+        这个 lovingVue 的 property 将会被更新。
+      -->
+      <my-component v-model="lovingVue"></my-component>
+    </div>
+    <script>
+      /* 
+        Vue 2.2.0 新增
+        一个组件上的 v-model 默认会利用名为 value 的 prop 和名为 input 的事件，
+        但是，对于单选框、复选框等类型的输入控件，可能会将 value 用于不同的目的，
+        model选项可以用来避免这样的冲突。
+      */
+      Vue.component('my-component', {
+        model: {
+          prop: 'checked',
+          event: 'change',
+        },
+        props: {
+          checked: Boolean,
+        },
+        template: `
+          <div>
+            <input
+              type="checkbox"
+              :checked="checked"
+              @change="$emit('change', $event.target.checked)"
+            >
+            <br>
+            <span>checked: {{checked}}</span>
+          </div>
+        `,
+      })
+      var vm = new Vue({
+        el: '#web',
+        data() {
+          return {
+            lovingVue: false,
+          }
+        },
+      })
+    </script>
+  </body>
+</html>
