@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React 18 回调ref中回调函数执行次数</title>
+</head>
+
+<body>
+    <!-- 准备一个容器 -->
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="./js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script type="text/javascript" src="./js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="./js/babel.min.js"></script>
+    <!-- 引入prop-types -->
+    <script type="text/javascript" src="./js/prop-types.js"></script>
+    <script type="text/babel">
+        // 1. 创建类式组件
+        class Demo extends React.Component {
+
+            state = {isHot:true}
+
+            showInfo = () => {
+                const {ipt1} = this
+                alert(ipt1.value)
+            }
+            changeWether = () => {
+                const {isHot} = this.state
+                this.setState({isHot:!isHot})
+            }
+            saveInput = (c) => {
+                this.ipt1 = c
+                console.log('@',c);
+            }
+
+            render() {
+                const {isHot} = this.state
+                return (
+                    <div>
+                        <h2>今天天气很{isHot ? '炎热':'凉爽'}</h2>
+                        {/*<input ref={(currentNode) => {this.ipt1 = currentNode; console.log('@', currentNode);}} type="text" placeholder="点击按钮提示数据"/> */}
+                        <input ref={this.saveInput} type="text"/>
+                        <button onClick={this.showInfo}>点我提示输入的数据</button>
+                        <button onClick={this.changeWether}>切换天气</button>
+                    </div>
+                )
+            }
+        }
+        // 2. 渲染组件到页面
+        ReactDOM.render(<Demo />, document.getElementById('test'))
+    </script>
+</body>
+
+</html>
