@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>隐藏元素 盒模型属性设为0</title>
+    <style>
+      div {
+        width: 100px;
+        height: 100px;
+      }
+
+      .div1 {
+        background-color: lightpink;
+      }
+
+      .div2 {
+        overflow: hidden;
+        padding: 0;
+        width: 0;
+        height: 0;
+        border: 0;
+        margin: 0;
+        background-color: lightgreen;
+      }
+
+      .div3 {
+        background-color: lightblue;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="div1"></div>
+    <div class="div2" onclick="foo()"></div>
+    <div class="div3"></div>
+    <script>
+      function foo() {
+        console.log('foo')
+      }
+    </script>
+  </body>
+</html>

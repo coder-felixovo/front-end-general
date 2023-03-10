@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>单行文本溢出</title>
+    <style>
+      div {
+        width: 200px;
+        border: 1px solid blue;
+        /* 设置文本不换行 */
+        white-space: nowrap;
+        /* 隐藏内部溢出元素 */
+        overflow: hidden;
+        /* 文本溢出显示省略号 */
+        text-overflow: ellipsis;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>单行文本溢出</h1>
+    <div>这是一段溢出的文本aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+  </body>
+</html>

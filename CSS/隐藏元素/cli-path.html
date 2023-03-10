@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>隐藏元素 cli-path</title>
+    <style>
+      div {
+        width: 100px;
+        height: 100px;
+      }
+
+      .div1 {
+        background-color: lightpink;
+      }
+
+      .div2 {
+        clip-path: polygon(0px 0px, 0px 0px, 0px 0px, 0px 0px);
+        background-color: lightgreen;
+      }
+
+      .div3 {
+        background-color: lightblue;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="div1"></div>
+    <div class="div2" onclick="foo()"></div>
+    <div class="div3"></div>
+    <script>
+      function foo() {
+        console.log('foo')
+      }
+    </script>
+  </body>
+</html>

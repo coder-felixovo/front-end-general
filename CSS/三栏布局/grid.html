@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>三栏布局 gird</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      .main {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 200px auto 200px;
+      }
+      .left {
+        background-color: lightpink;
+      }
+      .middle {
+        background-color: lightblue;
+      }
+      .right {
+        background-color: lightgreen;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="left">Left</div>
+      <div class="middle">Middle</div>
+      <div class="right">Right</div>
+    </div>
+  </body>
+</html>

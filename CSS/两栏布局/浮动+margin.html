@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>两栏布局 浮动+margin</title>
+    <style>
+      /* 
+        两栏布局
+        1. 左边固定宽度，右边自适应
+        2. 使用浮动+margin实现
+      */
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      #web {
+        overflow: hidden;
+      }
+      .left {
+        float: left;
+        width: 200px;
+        background-color: lightpink;
+      }
+      .right {
+        margin-left: 200px;
+        background-color: lightblue;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="web">
+      <div class="left">Left</div>
+      <div class="right">Right</div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>三栏布局-双飞翼布局</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      .content {
+        float: left;
+        width: 100%;
+      }
+      .middle {
+        height: 100px;
+        margin-left: 200px;
+        margin-right: 200px;
+        background-color: lightblue;
+      }
+      .left {
+        float: left;
+        width: 200px;
+        height: 100px;
+        margin-left: -100%;
+        background-color: lightpink;
+      }
+      .right {
+        float: left;
+        width: 200px;
+        height: 100px;
+        margin-left: -200px;
+        background-color: lightgreen;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 三栏布局-双飞翼布局 -->
+    <div class="content">
+      <div class="middle"></div>
+    </div>
+    <div class="left"></div>
+    <div class="right"></div>
+  </body>
+</html>

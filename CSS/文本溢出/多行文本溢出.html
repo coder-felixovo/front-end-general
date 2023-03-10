@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>多行文本溢出</title>
+    <style>
+      .based-on-height {
+        position: relative;
+        overflow: hidden;
+        width: 100px;
+        height: 40px;
+      }
+
+      .based-on-height::after {
+        content: '...';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        padding-right: 40px;
+      }
+
+      .based-on-rows {
+        width: 100px;
+        display: -webkit-box; /* 设置为弹性伸缩盒子*/
+        -webkit-line-clamp: 2; /* 限制块元素文本显示行数 */
+        -webkit-box-orient: vertical; /* 设置弹性伸缩盒子子元素的排列方式 */
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>多行文本溢出</h1>
+    <p>基于高度截断</p>
+    <div class="based-on-height">这是一段很长的文本aaaaaaaaaaaa</div>
+    <p>基于行数截断</p>
+    <div class="based-on-rows">这是一段很长的文本aaaaaaaaaaaa</div>
+  </body>
+</html>

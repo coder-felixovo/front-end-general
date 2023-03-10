@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>清除浮动 父元素添加伪元素:after</title>
+    <style>
+      .div1-child {
+        float: left;
+        width: 50px;
+        height: 50px;
+      }
+
+      .div1 > .div1-child:nth-child(1) {
+        background-color: lightpink;
+      }
+
+      .div1 > .div1-child:nth-child(2) {
+        background-color: lightblue;
+      }
+
+      .div2 {
+        width: 200px;
+        height: 200px;
+        background-color: lightgreen;
+      }
+
+      .clearfix:after {
+        content: '.';
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+      }
+
+      /* IE6、IE7才有 */
+      .clearfix {
+        *zoom: 1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- 父元素添加伪元素:after -->
+    <div class="div1 clearfix">
+      <div class="div1-child"></div>
+      <div class="div1-child"></div>
+    </div>
+    <div class="div2"></div>
+  </body>
+</html>

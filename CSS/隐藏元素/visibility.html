@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>隐藏元素 visibility: hidden</title>
+    <style>
+      div {
+        width: 100px;
+        height: 100px;
+      }
+
+      .div1 {
+        background-color: lightpink;
+      }
+
+      .div2 {
+        visibility: hidden;
+        background-color: lightgreen;
+      }
+
+      .div3 {
+        background-color: lightblue;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="div1" onclick="onClickDiv1()"></div>
+    <div class="div2" onclick="visibility()"></div>
+    <div class="div3"></div>
+    <script>
+      function onClickDiv1() {
+        console.log('You click div1')
+      }
+      function visibility() {
+        console.log('visibility')
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>问题演示：父元素跟随子元素margin-top移动</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      .parent {
+        height: 300px;
+        background-color: lightpink;
+      }
+      .child {
+        height: 100px;
+        background-color: lightblue;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+      可以发现，为 div.child 设置 margin-top，div.parent 也跟随移动了。
+      原因：div.child 上边缘和 div.parent 重合。
+     -->
+    <div class="parent">
+      <div class="child"></div>
+    </div>
+  </body>
+</html>
